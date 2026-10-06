@@ -1,0 +1,89 @@
+<footer class="bg-white">
+  <!-- Parte superior -->
+  <div class="max-w-7xl mx-auto px-6 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+      <!-- Logo y descripcion -->
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+              />
+            </svg>
+          </div>
+          <span class="text-xl font-bold text-teal-700">Travel América Latina</span>
+        </div>
+        <p class="text-sm text-gray-500 leading-relaxed max-w-md">
+          La guía definitiva para descubrir los tesoros naturales, culturales y urbanos de Centro y
+          Sudamérica. Rutas auténticas, experiencias inolvidables y asesoría experta.
+        </p>
+      </div>
+
+      <!-- Regiones -->
+      <div>
+        <h4 class="text-xs font-bold text-gray-900 uppercase tracking-wider mb-4">Regiones</h4>
+        <ul class="space-y-2.5">
+          @for (region of regions; track region) {
+            <li>
+              <a href="#" class="text-sm text-gray-500 hover:text-teal-600 transition-colors">
+                {{ region }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Categorias -->
+      <div>
+        <h4 class="text-xs font-bold text-gray-900 uppercase tracking-wider mb-4">Categorías</h4>
+        <ul class="space-y-2.5">
+          @for (category of categories; track category) {
+            <li>
+              <a href="#" class="text-sm text-gray-500 hover:text-teal-600 transition-colors">
+                {{ category }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-bold text-gray-900 uppercase tracking-wider mb-4">
+          Crónicas de América
+        </h4>
+        <p class="text-sm text-gray-500 leading-relaxed">
+          Suscríbete a nuestro boletín semanal con recomendaciones curadas, senderos secretos y
+          ofertas exclusivas de expediciones.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Parte inferior -->
+  <div class="bg-gray-50 border-t border-gray-100">
+    <div
+      class="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3"
+    >
+      <p class="text-xs text-gray-400">
+        © {{ year }} Travel América Latina. Todos los derechos reservados.
+      </p>
+      <div class="flex items-center gap-5">
+        @for (link of legalLinks; track link) {
+          <a href="#" class="text-xs text-gray-500 hover:text-teal-600 transition-colors">
+            {{ link }}
+          </a>
+        }
+      </div>
+    </div>
+  </div>
+</footer>
