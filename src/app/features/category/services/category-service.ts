@@ -1,7 +1,8 @@
 import { HttpClient, httpResource } from '@angular/common/http';
 import { inject, Injectable, InputSignal, signal } from '@angular/core';
-import { AddCategoryRequest, Category } from '../models/category.model';
+import { AddCategoryRequest, Category, UpdateCategoryRequest } from '../models/category.model';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ export class CategoryService {
   private apiBaseUrl = 'http://localhost:5125/api';
 
   addCategoryStatus = signal<'idle' | 'loading' | 'error' | 'success'>('idle');
+  updateCategoryStatus = signal<'idle' | 'loading' | 'error' | 'success'>('idle');
 
   //Crear categoria
   addCategory(category: AddCategoryRequest) {
@@ -41,5 +43,23 @@ export class CategoryService {
 
       return `${this.apiBaseUrl}/Categories/${categoryId}`;
     });
+  }
+
+  // Actualizar categoria
+  updateCategoryById(id: string, updateCategoryRequestDto: UpdateCategoryRequest) {
+    this.updateCategoryStatus.set('loading');
+    this.http.put<void>(`${this.apiBaseUrl}/Categories/${id}`, updateCategoryRequestDto).subscribe({
+      next: () => {
+        this.updateCategoryStatus.set('success');
+      },
+      error: () => {
+        this.updateCategoryStatus.set('error');
+      },
+    });
+  }
+
+  // Eliminar categoria
+  deleteCategory(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiBaseUrl}/categories/${id}`);
   }
 }

@@ -6,6 +6,14 @@ export interface AddCategoryRequest {
   iconUrl?: string;
 }
 
+//Actualizar categoria
+export interface UpdateCategoryRequest {
+  name: string;
+  urlHandle: string;
+  description?: string;
+  iconUrl?: string;
+}
+
 // Datos para mostrar o trenderizar categoria
 export interface Category {
   id: string;
