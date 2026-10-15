@@ -1,0 +1,431 @@
+<div class="bg-gray-100 min-h-[calc(100dvh-4.5rem)] px-6 pt-6 pb-16 md:px-10">
+  <!-- Header -->
+  <div class="max-w-7xl mx-auto mb-8 pt-20">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <h1 class="text-2xl md:text-3xl font-bold text-gray-900">Lista de Blog Posts</h1>
+        <p class="mt-2 text-sm md:text-base text-gray-600 max-w-2xl">
+          Administra las crónicas, itinerarios y guías de viaje. Revisa su estado, edita su
+          contenido o crea una nueva publicación.
+        </p>
+      </div>
+      <button
+        [routerLink]="['/admin', 'blogposts', 'add']"
+        class="inline-flex items-center gap-2 bg-teal-700 hover:bg-teal-800 text-white font-semibold px-5 py-2.5 rounded-full transition-colors shadow-sm"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.5"
+            d="M12 4v16m8-8H4"
+          />
+        </svg>
+        Crear Blog Post
+      </button>
+    </div>
+  </div>
+
+  <!-- Stats Cards -->
+  <div
+    class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-8"
+  >
+    <!-- Card 1 Total -->
+    <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+      <div class="flex items-start justify-between mb-4">
+        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Total Articulos</p>
+        <div class="p-2 bg-gray-100 rounded-lg">
+          <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            />
+          </svg>
+        </div>
+      </div>
+      <p class="text-4xl font-bold text-gray-900">324</p>
+      <div class="mt-4 flex items-start gap-2">
+        <svg
+          class="w-4 h-4 text-teal-600 mt-0.5 flex-0"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+          />
+        </svg>
+        <p class="text-xs text-gray-600 leading-tight">
+          En <span class="font-semibold text-gray-900">12</span> categorías regionales activas
+        </p>
+      </div>
+    </div>
+
+    <!-- Card 2 Publicados -->
+    <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+      <div class="flex items-start justify-between mb-4">
+        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Visibles</p>
+        <div class="p-2 bg-teal-100 rounded-lg">
+          <svg class="w-4 h-4 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2.5"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+        </div>
+      </div>
+      <p class="text-4xl font-bold text-teal-700">298</p>
+      <div class="mt-4 flex items-start gap-2">
+        <svg
+          class="w-4 h-4 text-teal-600 mt-0.5 flex-0"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <p class="text-xs text-gray-600 leading-tight">
+          <span class="font-semibold text-gray-900">92%</span> del inventario editorial indexado
+        </p>
+      </div>
+    </div>
+
+    <!-- Card 3 Borradores -->
+    <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+      <div class="flex items-start justify-between mb-4">
+        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide leading-tight">
+          Ocultos /<br />Borrador
+        </p>
+        <div class="p-2 bg-orange-100 rounded-lg">
+          <svg
+            class="w-4 h-4 text-orange-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+            />
+          </svg>
+        </div>
+      </div>
+      <p class="text-4xl font-bold text-orange-600">26</p>
+      <div class="mt-4 flex items-center gap-3">
+        <p class="text-xs text-gray-600">
+          <span class="font-semibold text-orange-600">8</span> programados
+        </p>
+        <span class="text-gray-300">•</span>
+        <p class="text-xs text-gray-600">
+          <span class="font-semibold text-gray-900">18</span> sin publicar
+        </p>
+      </div>
+    </div>
+
+    <!-- Card 4 Lecturas -->
+    <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+      <div class="flex items-start justify-between mb-4">
+        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide leading-tight">
+          Lecturas Este<br />Mes
+        </p>
+        <div class="p-2 bg-teal-100 rounded-lg">
+          <svg class="w-4 h-4 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+            />
+          </svg>
+        </div>
+      </div>
+      <p class="text-4xl font-bold text-gray-900">1.2M</p>
+      <div class="mt-4 flex items-start gap-2">
+        <svg
+          class="w-4 h-4 text-teal-600 mt-0.5 flex-0"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+          />
+        </svg>
+        <p class="text-xs text-gray-600 leading-tight">
+          <span class="font-semibold text-gray-900">+18.4%</span> vs mes anterior
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Listado -->
+  <div class="max-w-7xl mx-auto">
+    <!-- Barra de filtros -->
+    <div
+      class="bg-white rounded-2xl border border-gray-200 shadow-sm px-6 py-4 mb-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+    >
+      <div class="flex items-center gap-1 p-1 bg-gray-100 rounded-full w-fit">
+        <button
+          type="button"
+          class="px-4 py-1.5 text-sm font-semibold text-white bg-teal-700 rounded-full shadow-sm transition-colors"
+        >
+          Todos
+        </button>
+        <button
+          type="button"
+          class="px-4 py-1.5 text-sm font-medium text-gray-600 hover:text-teal-700 rounded-full transition-colors"
+        >
+          Visibles
+        </button>
+        <button
+          type="button"
+          class="px-4 py-1.5 text-sm font-medium text-gray-600 hover:text-teal-700 rounded-full transition-colors"
+        >
+          Ocultos
+        </button>
+      </div>
+
+      <div class="relative w-full md:w-72">
+        <svg
+          class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+          />
+        </svg>
+        <input
+          type="text"
+          placeholder="Buscar blog posts..."
+          class="w-full pl-10 pr-4 py-2.5 bg-gray-100 rounded-full text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
+        />
+      </div>
+    </div>
+
+    @if (isLoading()) {
+      <!-- Cargando -->
+      <div
+        class="bg-white rounded-2xl border border-gray-200 shadow-sm px-6 py-16 flex flex-col items-center justify-center text-center gap-3"
+      >
+        <span class="w-10 h-10 rounded-full border-4 border-gray-200 border-t-teal-600 animate-spin"></span>
+        <p class="text-sm font-semibold text-gray-900">Cargando blog posts....</p>
+        <p class="text-xs text-gray-500">Estamos obteniendo la información, espera un momento.</p>
+      </div>
+    } @else {
+      @if (isError()) {
+        <!-- Error -->
+        <div
+          class="bg-white rounded-2xl border border-red-200 shadow-sm px-6 py-16 flex flex-col items-center justify-center text-center gap-3"
+        >
+          <div class="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center">
+            <svg
+              class="w-7 h-7 text-red-500"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 9v3.75m0 3.75h.008v.008H12v-.008zm0-6.75a9 9 0 110 18 9 9 0 010-18z"
+              />
+            </svg>
+          </div>
+          <p class="text-sm font-semibold text-gray-900">Ha ocurrido un error</p>
+          <p class="text-xs text-gray-500 max-w-sm leading-relaxed">
+            No pudimos cargar los blog posts. Verifica tu conexión con el servidor e inténtalo
+            nuevamente.
+          </p>
+          <button
+            type="button"
+            (click)="reload()"
+            class="mt-1 inline-flex items-center gap-2 bg-teal-700 hover:bg-teal-800 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors shadow-sm"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              />
+            </svg>
+            Reintentar
+          </button>
+        </div>
+      } @else {
+        <!-- Tabla Container -->
+        <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+          <!-- Header Tabla -->
+          <div
+            class="grid grid-cols-12 gap-4 px-6 py-4 bg-gray-100 border-b border-gray-300 text-xs font-semibold text-gray-700 uppercase tracking-wider"
+          >
+            <div class="col-span-5">Artículo</div>
+            <div class="col-span-2">Publicación</div>
+            <div class="col-span-2">Autor</div>
+            <div class="col-span-2">Estado</div>
+            <div class="col-span-1 text-right">Acciones</div>
+          </div>
+
+          @for (blog of valueBlogPosts(); track blog.id) {
+            <!-- Fila del articulo -->
+            <div
+              class="grid grid-cols-12 gap-4 px-6 py-5 border-b border-gray-200 hover:bg-gray-100 transition-colors items-center"
+            >
+              <div class="col-span-5 flex items-start gap-5">
+                <div class="w-12 h-12 shrink-0 overflow-hidden rounded-lg bg-gray-100">
+                  <img
+                    [src]="
+                      blog.featuredImageUrl ||
+                      'https://goloba.com/themes/shop/default/build/assets/large-product-placeholder-13b8a96b.webp'
+                    "
+                    (error)="
+                      $event.target.src =
+                        'https://goloba.com/themes/shop/default/build/assets/large-product-placeholder-13b8a96b.webp'
+                    "
+                    class="w-12 h-12 rounded-lg object-cover"
+                    [alt]="blog.title"
+                  />
+                </div>
+
+                <div class="min-w-0">
+                  <h3 class="text-sm font-semibold text-gray-900 truncate">
+                    {{ blog.title }}
+                  </h3>
+                  <p class="text-xs text-gray-500 mt-0.5 truncate">/blog/{{ blog.slug }}</p>
+                </div>
+              </div>
+
+              <div class="col-span-2">
+                @if (blog.publishedDate) {
+                  <span
+                    class="inline-flex items-center gap-1.5 w-fit px-2.5 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full"
+                  >
+                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                    {{ blog.publishedDate | date: 'dd MMM yyyy' : '' : 'es' }}
+                  </span>
+                } @else {
+                  <span
+                    class="inline-flex items-center gap-1.5 w-fit px-2.5 py-1 bg-gray-100 text-gray-500 text-xs font-medium rounded-full"
+                  >
+                    <span class="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
+                    Sin publicar
+                  </span>
+                }
+              </div>
+
+              <div class="col-span-2">
+                <p class="text-sm text-gray-700 truncate">{{ blog.author || 'Sin autor' }}</p>
+              </div>
+
+              <div class="col-span-2">
+                @if (blog.isVisible) {
+                  <span
+                    class="inline-flex items-center w-fit px-2.5 py-1 bg-teal-100 text-teal-700 text-xs font-semibold rounded-full"
+                  >
+                    Visible
+                  </span>
+                } @else {
+                  <span
+                    class="inline-flex items-center w-fit px-2.5 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded-full"
+                  >
+                    Oculto
+                  </span>
+                }
+              </div>
+
+              <div class="col-span-1 flex justify-end">
+                <button
+                  type="button"
+                  class="inline-flex items-center gap-2 rounded-lg bg-amber-200 px-3 py-2 text-sm font-medium text-amber-800 shadow-sm transition-all duration-200 hover:bg-amber-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-amber-500/30 active:scale-95"
+                >
+                  Editar
+                </button>
+              </div>
+            </div>
+          } @empty {
+            <div class="px-6 py-10 text-center">
+              <p class="text-lg font-semibold text-gray-900">No hay artículos para mostrar</p>
+              <p class="mt-2 text-sm text-gray-500">Aún no se han creado artículos.</p>
+            </div>
+          }
+        </div>
+      }
+    }
+    <!-- Footer mas Paginacion -->
+    <div class="mt-5 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2 text-sm text-gray-600">
+        <span
+          >Mostrando <span class="font-semibold text-gray-900">1 a 5</span> de
+          <span class="font-semibold text-gray-900">324</span> entradas</span
+        >
+        <span class="text-gray-400">•</span>
+        <span>Filas por página:</span>
+        <select
+          class="bg-white border border-gray-200 rounded-lg px-2 py-1 text-sm font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
+        >
+          <option>10</option>
+          <option>25</option>
+          <option>50</option>
+        </select>
+      </div>
+
+      <div class="flex items-center gap-1">
+        <button
+          class="px-3 py-2 text-sm font-medium text-gray-400 bg-white border border-gray-200 rounded-lg cursor-not-allowed"
+          disabled
+        >
+          ‹
+        </button>
+        <button
+          class="px-3.5 py-2 text-sm font-semibold text-white bg-teal-700 rounded-lg shadow-sm"
+        >
+          1
+        </button>
+        <button
+          class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50"
+        >
+          2
+        </button>
+        <button
+          class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50"
+        >
+          3
+        </button>
+        <span class="px-2 text-gray-400">...</span>
+        <button
+          class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50"
+        >
+          54
+        </button>
+        <button
+          class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50"
+        >
+          ›
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

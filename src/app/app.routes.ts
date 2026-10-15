@@ -2,8 +2,11 @@ import { Routes } from '@angular/router';
 import { CategoryList } from './features/category/category-list/category-list';
 import { AddCategory } from './features/category/add-category/add-category';
 import { EditCategory } from './features/category/edit-category/edit-category';
+import { BlogpostList } from './features/blogPost/blogpost-list/blogpost-list';
+import { AddBlogpost } from './features/blogPost/add-blogpost/add-blogpost';
 
 export const routes: Routes = [
+  // categoria
   {
     path: 'admin/categories',
     component: CategoryList,
@@ -15,5 +18,15 @@ export const routes: Routes = [
   {
     path: 'admin/categories/edit/:id',
     component: EditCategory,
+  },
+
+  // blog post
+  {
+    path: 'admin/blogposts',
+    component: BlogpostList,
+  },
+  {
+    path: 'admin/blogposts/add',
+    component: AddBlogpost,
   },
 ];
