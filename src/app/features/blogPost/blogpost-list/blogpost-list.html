@@ -229,7 +229,9 @@
       <div
         class="bg-white rounded-2xl border border-gray-200 shadow-sm px-6 py-16 flex flex-col items-center justify-center text-center gap-3"
       >
-        <span class="w-10 h-10 rounded-full border-4 border-gray-200 border-t-teal-600 animate-spin"></span>
+        <span
+          class="w-10 h-10 rounded-full border-4 border-gray-200 border-t-teal-600 animate-spin"
+        ></span>
         <p class="text-sm font-semibold text-gray-900">Cargando blog posts....</p>
         <p class="text-xs text-gray-500">Estamos obteniendo la información, espera un momento.</p>
       </div>
@@ -359,6 +361,7 @@
               <div class="col-span-1 flex justify-end">
                 <button
                   type="button"
+                  [routerLink]="['/admin', 'blogposts', 'edit', blog.id]"
                   class="inline-flex items-center gap-2 rounded-lg bg-amber-200 px-3 py-2 text-sm font-medium text-amber-800 shadow-sm transition-all duration-200 hover:bg-amber-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-amber-500/30 active:scale-95"
                 >
                   Editar

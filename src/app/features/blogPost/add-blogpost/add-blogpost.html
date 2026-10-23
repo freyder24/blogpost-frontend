@@ -431,6 +431,24 @@
                   </div>
                   <button
                     type="button"
+                    (click)="openImageSelector(i)"
+                    title="Seleccionar imagen"
+                    class="p-2 rounded-lg text-gray-400 hover:bg-teal-50 hover:text-teal-600 transition-colors flex-0"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                      <circle cx="8.5" cy="8.5" r="1.5" />
+                      <polyline points="21 15 16 10 5 21" />
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
                     (click)="removeImage(i)"
                     title="Eliminar imagen"
                     class="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-red-600 transition-colors flex-0"
@@ -543,6 +561,25 @@
                 class="flex-1 bg-transparent text-sm text-gray-700 font-medium focus:outline-none"
               />
             </div>
+
+            <button
+              type="button"
+              (click)="openImageSelector('featured')"
+              class="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-teal-700 hover:text-teal-800 transition-colors"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <polyline points="21 15 16 10 5 21" />
+              </svg>
+              Seleccionar imagen
+            </button>
           </div>
 
           <!-- Card Publicacion -->
@@ -756,3 +793,6 @@
     </form>
   </div>
 </div>
+
+<!-- Popup de seleccion de imagen -->
+<app-image-selector></app-image-selector>
