@@ -1,0 +1,15 @@
+<section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+  @if (isLoading()) {
+    <p class="py-16 text-center text-gray-600">Cargando artículos..</p>
+  } @else if (error()) {
+    <p class="py-16 text-center text-red-700">No se pudieron cargar los artículos.</p>
+  } @else if (blogPosts()?.length) {
+    <div class="grid grid-cols-1 gap-6 sm:gap-7 md:grid-cols-2 lg:grid-cols-3">
+      @for (post of blogPosts(); track post.id) {
+        <app-blog-post-card [blogPost]="post" />
+      }
+    </div>
+  } @else {
+    <p class="py-16 text-center text-gray-500">Todavía no hay artículos.</p>
+  }
+</section>

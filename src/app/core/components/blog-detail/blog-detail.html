@@ -1,0 +1,80 @@
+<main class="min-h-screen bg-white">
+  @if (isLoading()) {
+    <p class="px-4 py-24 text-center text-gray-600">Cargando artículo..</p>
+  } @else if (error()) {
+    <p class="px-4 py-24 text-center text-red-700">No se pudo cargar el artículo.</p>
+  } @else if (blogPostResponse(); as post) {
+    <!-- Detalle BlogPost  -->
+    <article class="mx-auto max-w-6xl px-5 py-10 sm:px-8 sm:py-14">
+      <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+        <!-- Imagen  -->
+        <img
+          class="h-72 w-full rounded-lg object-cover shadow-md sm:h-96"
+          [src]="
+            post.featuredImageUrl ||
+            'https://images.pexels.com/photos/18290346/pexels-photo-18290346.jpeg'
+          "
+          [alt]="post.title"
+        />
+
+        <div>
+          <!-- Categoria  -->
+          @if (post.categories.length) {
+            <span
+              class="inline-flex rounded-md bg-yellow-500 px-3 py-1 text-sm font-bold text-slate-900"
+            >
+              {{ post.categories[0].name }}
+            </span>
+          }
+          <!-- Titulo  -->
+          <h1 class="mt-4 text-3xl font-extrabold leading-tight text-slate-900 sm:text-5xl">
+            {{ post.title }}
+          </h1>
+          <!-- Descripcion  -->
+          <p class="mt-4 text-lg leading-relaxed text-slate-600 sm:text-xl">
+            {{ post.shortDescription }}
+          </p>
+          <div
+            class="mt-6 flex flex-wrap gap-x-5 gap-y-2 border-t border-gray-200 pt-4 text-sm text-gray-500"
+          >
+            <!-- Autor  -->
+            @if (post.author) {
+              <span>Por {{ post.author }}</span>
+            }
+            <!-- Fecha  -->
+            @if (post.publishedDate) {
+              <time>{{ post.publishedDate | date: 'd MMMM y' : '' : 'es' }}</time>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Contenido  -->
+      <div class="mx-auto mt-10 max-w-3xl sm:mt-14">
+        <markdown
+          [data]="post.content"
+          class="block text-lg leading-relaxed text-slate-700"
+        ></markdown>
+      </div>
+
+      <!-- Galeria de imagenes  -->
+      @if (galleryImages().length) {
+        <section class="mt-12 border-t border-gray-200 pt-8" aria-labelledby="gallery-title">
+          <h2 id="gallery-title" class="mb-5 text-2xl font-bold text-slate-900">Galería</h2>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            @for (image of galleryImages(); track image) {
+              <img
+                class="h-64 w-full rounded-lg object-cover"
+                [src]="image"
+                [alt]="post.title"
+                loading="lazy"
+              />
+            }
+          </div>
+        </section>
+      }
+    </article>
+  } @else {
+    <p class="px-4 py-24 text-center text-gray-600">No encontramos ese artículo.</p>
+  }
+</main>

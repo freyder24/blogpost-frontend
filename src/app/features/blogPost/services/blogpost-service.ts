@@ -54,6 +54,23 @@ export class BlogPostService {
     });
   }
 
+  // Obtener detalle de blog post por slug
+  getBlogPostBySlug(slug: InputSignal<string | undefined>) {
+    return httpResource<BlogPost>(() => {
+      const blogPostSlug = slug();
+
+      if (!blogPostSlug) {
+        return undefined;
+      }
+
+      return {
+        // ejemplo http://{apiBaseUrl}/blog/namepais-playas-naturaleza-y-grandes-ciudades
+        url: `${this.apiBaseUrl}/api/BlogPosts/${blogPostSlug}`,
+        timeout: this.requestTimeout,
+      };
+    });
+  }
+
   // Actualizar blog post
   updateBlogPostById(id: string, updateBlogPostRequestDto: UpdateBlogPostRequest) {
     this.updateBlogPostStatus.set('loading');

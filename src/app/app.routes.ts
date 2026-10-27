@@ -5,13 +5,19 @@ import { EditCategory } from './features/category/edit-category/edit-category';
 import { BlogpostList } from './features/blogPost/blogpost-list/blogpost-list';
 import { AddBlogpost } from './features/blogPost/add-blogpost/add-blogpost';
 import { EditBlogpost } from './features/blogPost/edit-blogpost/edit-blogpost';
+import { Home } from './features/public/home/home';
+import { BlogDetail } from './core/components/blog-detail/blog-detail';
 
 export const routes: Routes = [
-  // Ruta por defecto
+  // Ruta por defecto,home
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'admin/blogposts',
+    component: Home,
+  },
+  {
+    path: 'blog/:slug',
+    component: BlogDetail,
   },
 
   // categoria

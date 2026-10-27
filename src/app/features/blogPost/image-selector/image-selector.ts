@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ImageUploadService } from '../services/image-upload.service';
 
@@ -27,13 +27,21 @@ export class ImageSelector {
   isLoading = this.images.isLoading;
 
   // Archivo elegido desde el computador
+  error = signal<string>('');
   file = signal<File | null>(null);
   filePreview = signal<string>('');
-
   isUploading = signal<boolean>(false);
-  error = signal<string>('');
 
-  // Seleccion desde el computador
+  constructor() {
+    effect(() => {
+      const selectedFile = this.file();
+      if (selectedFile) {
+        console.log('Imagen seleccionada:', selectedFile.name);
+      }
+    });
+  }
+
+  // Seleccionar desde el computador
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
