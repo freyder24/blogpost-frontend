@@ -17,14 +17,19 @@ export class CategoryService {
   //Crear categoria
   addCategory(category: AddCategoryRequest) {
     this.addCategoryStatus.set('loading');
-    this.http.post<void>(`${this.apiBaseUrl}/api/Categories`, category).subscribe({
-      next: () => {
-        this.addCategoryStatus.set('success');
-      },
-      error: () => {
-        this.addCategoryStatus.set('error');
-      },
-    });
+    this.http
+      .post<void>(`${this.apiBaseUrl}/api/Categories`, category, {
+        // para enviar cookies de sesion al backend, que es necesario para que el backend pueda autenticar al usuario y permitirle crear la categoria.
+        withCredentials: true,
+      })
+      .subscribe({
+        next: () => {
+          this.addCategoryStatus.set('success');
+        },
+        error: () => {
+          this.addCategoryStatus.set('error');
+        },
+      });
   }
 
   // Obtener todas las categorias
@@ -49,7 +54,9 @@ export class CategoryService {
   updateCategoryById(id: string, updateCategoryRequestDto: UpdateCategoryRequest) {
     this.updateCategoryStatus.set('loading');
     this.http
-      .put<void>(`${this.apiBaseUrl}/api/Categories/${id}`, updateCategoryRequestDto)
+      .put<void>(`${this.apiBaseUrl}/api/Categories/${id}`, updateCategoryRequestDto, {
+        withCredentials: true,
+      })
       .subscribe({
         next: () => {
           this.updateCategoryStatus.set('success');
@@ -62,6 +69,8 @@ export class CategoryService {
 
   // Eliminar categoria
   deleteCategory(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiBaseUrl}/api/Categories/${id}`);
+    return this.http.delete<void>(`${this.apiBaseUrl}/api/Categories/${id}`, {
+      withCredentials: true,
+    });
   }
 }

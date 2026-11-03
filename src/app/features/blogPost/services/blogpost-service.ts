@@ -20,14 +20,18 @@ export class BlogPostService {
   // Crear blog post
   addBlogPost(blogPost: AddBlogPostRequest) {
     this.addBlogPostStatus.set('loading');
-    this.http.post<BlogPost>(`${this.apiBaseUrl}/api/BlogPosts`, blogPost).subscribe({
-      next: () => {
-        this.addBlogPostStatus.set('success');
-      },
-      error: () => {
-        this.addBlogPostStatus.set('error');
-      },
-    });
+    this.http
+      .post<BlogPost>(`${this.apiBaseUrl}/api/BlogPosts`, blogPost, {
+        withCredentials: true,
+      })
+      .subscribe({
+        next: () => {
+          this.addBlogPostStatus.set('success');
+        },
+        error: () => {
+          this.addBlogPostStatus.set('error');
+        },
+      });
   }
 
   // Obtener todos los blog posts
@@ -75,7 +79,9 @@ export class BlogPostService {
   updateBlogPostById(id: string, updateBlogPostRequestDto: UpdateBlogPostRequest) {
     this.updateBlogPostStatus.set('loading');
     this.http
-      .put<BlogPost>(`${this.apiBaseUrl}/api/BlogPosts/${id}`, updateBlogPostRequestDto)
+      .put<BlogPost>(`${this.apiBaseUrl}/api/BlogPosts/${id}`, updateBlogPostRequestDto, {
+        withCredentials: true,
+      })
       .subscribe({
         next: () => {
           this.updateBlogPostStatus.set('success');
@@ -88,6 +94,8 @@ export class BlogPostService {
 
   // Eliminar blog post
   deleteBlogPostById(id: string) {
-    return this.http.delete<BlogPost>(`${this.apiBaseUrl}/api/BlogPosts/${id}`);
+    return this.http.delete<BlogPost>(`${this.apiBaseUrl}/api/BlogPosts/${id}`, {
+      withCredentials: true,
+    });
   }
 }

@@ -7,6 +7,8 @@ import { AddBlogpost } from './features/blogPost/add-blogpost/add-blogpost';
 import { EditBlogpost } from './features/blogPost/edit-blogpost/edit-blogpost';
 import { Home } from './features/public/home/home';
 import { BlogDetail } from './core/components/blog-detail/blog-detail';
+import { Login } from './features/auth/login/login';
+import { Register } from './features/auth/register/register';
 
 export const routes: Routes = [
   // Ruta por defecto,home
@@ -15,6 +17,17 @@ export const routes: Routes = [
     pathMatch: 'full',
     component: Home,
   },
+
+  // auth
+  {
+    path: 'login',
+    component: Login,
+  },
+  {
+    path: 'register',
+    component: Register,
+  },
+
   {
     path: 'blog/:slug',
     component: BlogDetail,

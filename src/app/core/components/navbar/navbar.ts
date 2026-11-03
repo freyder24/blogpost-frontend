@@ -1,6 +1,7 @@
-import { Component, HostListener, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, HostListener, inject, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { LucideMenu, LucideSearch, LucideX } from '@lucide/angular';
+import { AuthService } from '../../../features/auth/services/auth-service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,10 +9,26 @@ import { LucideMenu, LucideSearch, LucideX } from '@lucide/angular';
   templateUrl: './navbar.html',
 })
 export class Navbar {
+  // signal para controlar el estado del menú y los dropdowns
   readonly isMenuOpen = signal(false);
   isDropdownOpen = signal(false);
   mobileDropdownOpen = signal<string | null>(null);
 
+  // signal para almacenar el usuario autenticado
+  authService = inject(AuthService);
+  router = inject(Router);
+
+  onLogout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.authService.user.set(null);
+        this.router.navigate(['/']);
+      },
+      error: (error) => {
+        console.error('Error al cerrar sesión:', error);
+      },
+    });
+  }
   toggleMenu() {
     this.isMenuOpen.update((value) => !value);
   }
