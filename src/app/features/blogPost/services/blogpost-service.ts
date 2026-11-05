@@ -98,4 +98,9 @@ export class BlogPostService {
       withCredentials: true,
     });
   }
+
+  // Consulta el total directamente al API.
+  getBlogPostCount() {
+    return this.http.get<number>(`${this.apiBaseUrl}/api/BlogPosts/count`);
+  }
 }

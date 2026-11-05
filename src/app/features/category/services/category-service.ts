@@ -68,6 +68,11 @@ export class CategoryService {
     });
   }
 
+  // Obtener total de categorias
+  getCategoryCount(): Observable<number> {
+    return this.http.get<number>(`${this.apiBaseUrl}/api/Categories/count`);
+  }
+
   // Actualizar categoria
   updateCategoryById(id: string, updateCategoryRequestDto: UpdateCategoryRequest) {
     this.updateCategoryStatus.set('loading');

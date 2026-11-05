@@ -5,8 +5,8 @@
       <div>
         <h1 class="text-2xl md:text-3xl font-bold text-gray-900">Lista de Blog Posts</h1>
         <p class="mt-2 text-sm md:text-base text-gray-600 max-w-2xl">
-          Administra las crÃ³nicas, itinerarios y guÃ­as de viaje. Revisa su estado, edita su
-          contenido o crea una nueva publicaciÃ³n.
+          Administra las crónicas, itinerarios y guías de viaje. Revisa su estado, edita su
+          contenido o crea una nueva publicación.
         </p>
       </div>
       <button
@@ -31,7 +31,7 @@
     class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-8"
   >
     <!-- Card 1 Total -->
-    <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+    <div class="bg-white rounded-2xl p-5 border border-gray-200 hover:shadow-md transition-shadow">
       <div class="flex items-start justify-between mb-4">
         <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Total Articulos</p>
         <div class="p-2 bg-gray-100 rounded-lg">
@@ -45,7 +45,9 @@
           </svg>
         </div>
       </div>
-      <p class="text-4xl font-bold text-gray-900">324</p>
+      <p class="text-3xl font-bold text-gray-900">
+        {{ totalCount() ?? valueBlogPosts()?.length ?? 0 }}
+      </p>
       <div class="mt-4 flex items-start gap-2">
         <svg
           class="w-4 h-4 text-teal-600 mt-0.5 flex-0"
@@ -60,14 +62,12 @@
             d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
           />
         </svg>
-        <p class="text-xs text-gray-600 leading-tight">
-          En <span class="font-semibold text-gray-900">12</span> categorÃ­as regionales activas
-        </p>
+        <p class="text-xs text-gray-600 leading-tight">Total registrado en el API</p>
       </div>
     </div>
 
     <!-- Card 2 Publicados -->
-    <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+    <div class="bg-white rounded-2xl p-5 border border-gray-200 hover:shadow-md transition-shadow">
       <div class="flex items-start justify-between mb-4">
         <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Visibles</p>
         <div class="p-2 bg-teal-100 rounded-lg">
@@ -81,7 +81,7 @@
           </svg>
         </div>
       </div>
-      <p class="text-4xl font-bold text-teal-700">298</p>
+      <p class="text-3xl font-bold text-teal-700">{{ visibleCount }}</p>
       <div class="mt-4 flex items-start gap-2">
         <svg
           class="w-4 h-4 text-teal-600 mt-0.5 flex-0"
@@ -96,14 +96,12 @@
             d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        <p class="text-xs text-gray-600 leading-tight">
-          <span class="font-semibold text-gray-900">92%</span> del inventario editorial indexado
-        </p>
+        <p class="text-xs text-gray-600 leading-tight">Posts visibles en la lista</p>
       </div>
     </div>
 
     <!-- Card 3 Borradores -->
-    <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+    <div class="bg-white rounded-2xl p-5 border border-gray-200 hover:shadow-md transition-shadow">
       <div class="flex items-start justify-between mb-4">
         <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide leading-tight">
           Ocultos /<br />Borrador
@@ -124,23 +122,21 @@
           </svg>
         </div>
       </div>
-      <p class="text-4xl font-bold text-orange-600">26</p>
+      <p class="text-3xl font-bold text-orange-600">{{ hiddenCount }}</p>
       <div class="mt-4 flex items-center gap-3">
         <p class="text-xs text-gray-600">
-          <span class="font-semibold text-orange-600">8</span> programados
+          <span class="font-semibold text-orange-600">{{ hiddenCount }}</span> posts ocultos
         </p>
         <span class="text-gray-300">â€¢</span>
-        <p class="text-xs text-gray-600">
-          <span class="font-semibold text-gray-900">18</span> sin publicar
-        </p>
+        <p class="text-xs text-gray-600">en la lista actual</p>
       </div>
     </div>
 
-    <!-- Card 4 Lecturas -->
-    <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+    <!-- Card 4 Resultados -->
+    <div class="bg-white rounded-2xl p-5 border border-gray-200 hover:shadow-md transition-shadow">
       <div class="flex items-start justify-between mb-4">
         <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide leading-tight">
-          Lecturas Este<br />Mes
+          Resultados<br />filtrados
         </p>
         <div class="p-2 bg-teal-100 rounded-lg">
           <svg class="w-4 h-4 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -153,7 +149,7 @@
           </svg>
         </div>
       </div>
-      <p class="text-4xl font-bold text-gray-900">1.2M</p>
+      <p class="text-3xl font-bold text-gray-900">{{ filteredBlogPosts.length }}</p>
       <div class="mt-4 flex items-start gap-2">
         <svg
           class="w-4 h-4 text-teal-600 mt-0.5 flex-0"
@@ -168,9 +164,7 @@
             d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
           />
         </svg>
-        <p class="text-xs text-gray-600 leading-tight">
-          <span class="font-semibold text-gray-900">+18.4%</span> vs mes anterior
-        </p>
+        <p class="text-xs text-gray-600 leading-tight">Coinciden con los filtros actuales</p>
       </div>
     </div>
   </div>
@@ -184,18 +178,27 @@
       <div class="flex items-center gap-1 p-1 bg-gray-100 rounded-full w-fit shrink-0">
         <button
           type="button"
-          class="px-4 py-1.5 text-sm font-semibold text-white bg-teal-700 rounded-full shadow-sm transition-colors"
+          (click)="setVisibility('all')"
+          [class.bg-teal-700]="visibilityFilter === 'all'"
+          [class.text-white]="visibilityFilter === 'all'"
+          class="px-4 py-1.5 text-sm font-semibold text-gray-600 hover:text-teal-700 rounded-full transition-colors"
         >
           Todos
         </button>
         <button
           type="button"
+          (click)="setVisibility('visible')"
+          [class.bg-teal-700]="visibilityFilter === 'visible'"
+          [class.text-white]="visibilityFilter === 'visible'"
           class="px-4 py-1.5 text-sm font-medium text-gray-600 hover:text-teal-700 rounded-full transition-colors"
         >
           Visibles
         </button>
         <button
           type="button"
+          (click)="setVisibility('hidden')"
+          [class.bg-teal-700]="visibilityFilter === 'hidden'"
+          [class.text-white]="visibilityFilter === 'hidden'"
           class="px-4 py-1.5 text-sm font-medium text-gray-600 hover:text-teal-700 rounded-full transition-colors"
         >
           Ocultos
@@ -218,6 +221,8 @@
         </svg>
         <input
           type="text"
+          [value]="searchTerm"
+          (input)="setSearch($any($event.target).value)"
           placeholder="Buscar blog posts..."
           class="w-full pl-10 pr-4 py-2.5 bg-gray-100 rounded-full text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
         />
@@ -261,24 +266,28 @@
           >
             <button
               type="button"
+              (click)="setSort('Más reciente')"
               class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
             >
               Más reciente
             </button>
             <button
               type="button"
+              (click)="setSort('Más antiguo')"
               class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
             >
               Más antiguo
             </button>
             <button
               type="button"
+              (click)="setSort('Título A-Z')"
               class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
             >
               Título A-Z
             </button>
             <button
               type="button"
+              (click)="setSort('Título Z-A')"
               class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
             >
               Título Z-A
@@ -352,13 +361,13 @@
             <div class="col-span-1 text-right">Acciones</div>
           </div>
 
-          @for (blog of valueBlogPosts(); track blog.id) {
+          @for (blog of pageBlogPosts; track blog.id) {
             <!-- Fila del articulo -->
             <div
-              class="grid grid-cols-12 gap-4 px-6 py-5 border-b border-gray-200 hover:bg-gray-100 transition-colors items-center"
+              class="grid grid-cols-12 gap-4 px-5 py-4 border-b border-gray-200 hover:bg-gray-100 transition-colors items-center"
             >
-              <div class="col-span-5 flex items-start gap-5">
-                <div class="w-12 h-12 shrink-0 overflow-hidden rounded-lg bg-gray-100">
+              <div class="col-span-5 flex items-start gap-4 min-w-0">
+                <div class="w-10 h-10 shrink-0 overflow-hidden rounded-lg bg-gray-100">
                   <img
                     [src]="
                       blog.featuredImageUrl ||
@@ -368,16 +377,16 @@
                       $event.target.src =
                         'https://goloba.com/themes/shop/default/build/assets/large-product-placeholder-13b8a96b.webp'
                     "
-                    class="w-12 h-12 rounded-lg object-cover"
+                    class="w-10 h-10 rounded-lg object-cover"
                     [alt]="blog.title"
                   />
                 </div>
 
                 <div class="min-w-0">
-                  <h3 class="text-sm font-semibold text-gray-900 truncate">
+                  <h3 class="text-xs font-medium text-gray-900 truncate">
                     {{ blog.title }}
                   </h3>
-                  <p class="text-xs text-gray-500 mt-0.5 truncate">/blog/{{ blog.slug }}</p>
+                  <p class="text-[11px] text-gray-500 mt-0.5 truncate">/blog/{{ blog.slug }}</p>
                 </div>
               </div>
 
@@ -438,58 +447,45 @@
         </div>
       }
     }
-    <!-- Footer mas Paginacion -->
+    <!-- Paginacion de los resultados filtrados -->
     <div class="mt-5 flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-2 text-sm text-gray-600">
         <span
-          >Mostrando <span class="font-semibold text-gray-900">1 a 5</span> de
-          <span class="font-semibold text-gray-900">324</span> entradas</span
+          >Mostrando <strong class="text-gray-900">{{ firstItem }} a {{ lastItem }}</strong> de
+          <strong class="text-gray-900">{{ filteredBlogPosts.length }}</strong> entradas</span
         >
-        <span class="text-gray-400">â€¢</span>
-        <span>Filas por pÃ¡gina:</span>
+        <span>Filas por página:</span>
         <select
-          class="bg-white border border-gray-200 rounded-lg px-2 py-1 text-sm font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
+          class="bg-white border border-gray-200 rounded-lg px-2 py-1 text-sm font-medium text-gray-900"
+          [value]="pageSize"
+          (change)="setPageSize(+$any($event.target).value)"
         >
-          <option>10</option>
-          <option>25</option>
-          <option>50</option>
+          <option [value]="5">5</option>
+          <option [value]="10">10</option>
+          <option [value]="25">25</option>
+          <option [value]="50">50</option>
         </select>
       </div>
-
-      <div class="flex items-center gap-1">
+      <div class="flex items-center gap-2">
         <button
-          class="px-3 py-2 text-sm font-medium text-gray-400 bg-white border border-gray-200 rounded-lg cursor-not-allowed"
-          disabled
+          type="button"
+          class="px-3 py-2 border rounded-lg disabled:text-gray-400"
+          [disabled]="currentPage === 1"
+          (click)="setPage(currentPage - 1)"
         >
-          â€¹
+          ‹
         </button>
+        <span class="px-2 text-sm text-gray-700">Página {{ currentPage }} de {{ totalPages }}</span>
         <button
-          class="px-3.5 py-2 text-sm font-semibold text-white bg-teal-700 rounded-lg shadow-sm"
+          type="button"
+          class="px-3 py-2 border rounded-lg disabled:text-gray-400"
+          [disabled]="currentPage >= totalPages"
+          (click)="setPage(currentPage + 1)"
         >
-          1
-        </button>
-        <button
-          class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50"
-        >
-          2
-        </button>
-        <button
-          class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50"
-        >
-          3
-        </button>
-        <span class="px-2 text-gray-400">...</span>
-        <button
-          class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50"
-        >
-          54
-        </button>
-        <button
-          class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50"
-        >
-          â€º
+          ›
         </button>
       </div>
     </div>
   </div>
 </div>
+
