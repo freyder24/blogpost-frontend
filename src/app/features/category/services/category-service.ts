@@ -1,4 +1,4 @@
-import { HttpClient, httpResource } from '@angular/common/http';
+import { HttpClient, HttpParams, httpResource } from '@angular/common/http';
 import { inject, Injectable, InputSignal, signal } from '@angular/core';
 import { AddCategoryRequest, Category, UpdateCategoryRequest } from '../models/category.model';
 import { Observable } from 'rxjs';
@@ -33,8 +33,26 @@ export class CategoryService {
   }
 
   // Obtener todas las categorias
-  getAllCategories() {
-    return httpResource<Category[]>(() => `${this.apiBaseUrl}/api/Categories`);
+  getAllCategories(
+    query?: string,
+    sortBy?: string,
+    sortOrder?: 'asc' | 'desc',
+  ): Observable<Category[]> {
+    // Crear un objeto HttpParams para agregar el parametro de búsqueda si se proporciona
+    let params = new HttpParams();
+    if (query) {
+      params = params.set('query', query);
+    }
+    if (sortBy) {
+      params = params.set('sortBy', sortBy);
+    }
+    if (sortOrder) {
+      params = params.set('sortOrder', sortOrder);
+    }
+
+    return this.http.get<Category[]>(`${this.apiBaseUrl}/api/Categories`, {
+      params: params,
+    });
   }
 
   // Obtener detalle de categoria por id

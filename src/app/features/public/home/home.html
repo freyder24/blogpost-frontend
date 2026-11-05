@@ -1,14 +1,47 @@
 <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+  <div class="mb-10 flex justify-center">
+    <div class="flex items-center gap-3 w-full max-w-2xl">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Explorar destinos..."
+        class="flex-1 px-6 py-3 bg-gray-100 rounded-full text-sm md:text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      />
+      <button
+        type="button"
+        class="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-yellow-500 hover:bg-yellow-600 text-white rounded-full transition-colors shadow-sm"
+        aria-label="Buscar"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 18a7.5 7.5 0 006.15-3.35z"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+
   @if (isLoading()) {
     <p class="py-16 text-center text-gray-600">Cargando artículos..</p>
   } @else if (error()) {
     <p class="py-16 text-center text-red-700">No se pudieron cargar los artículos.</p>
-  } @else if (blogPosts()?.length) {
+  } @else if (filteredBlogPosts().length) {
     <div class="grid grid-cols-1 gap-6 sm:gap-7 md:grid-cols-2 lg:grid-cols-3">
-      @for (post of blogPosts(); track post.id) {
+      @for (post of filteredBlogPosts(); track post.id) {
         <app-blog-post-card [blogPost]="post" />
       }
     </div>
+  } @else if (searchTerm().trim()) {
+    <p class="py-16 text-center text-gray-500">No se encontraron artículos para tu búsqueda.</p>
   } @else {
     <p class="py-16 text-center text-gray-500">Todavía no hay artículos.</p>
   }

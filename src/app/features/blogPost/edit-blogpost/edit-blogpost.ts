@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, effect, inject, input } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, inject, input, signal } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
@@ -7,6 +7,7 @@ import { UpdateBlogPostRequest } from '../models/blogPost.model';
 import { CategoryService } from '../../category/services/category-service';
 import { ImageSelector } from '../image-selector/image-selector';
 import { ImageUploadService } from '../services/image-upload.service';
+import { Category } from '../../category/models/category.model';
 
 @Component({
   selector: 'app-edit-blogpost',
@@ -30,10 +31,9 @@ export class EditBlogpost {
   blogPostResourceRef = this.blogPostService.getBlogPostById(this.id);
 
   // Categorias disponibles para asignar
-  private getAllCategoriesRef = this.categoryService.getAllCategories();
-  categories = this.getAllCategoriesRef.value;
-  isLoadingCategories = this.getAllCategoriesRef.isLoading;
-  isErrorCategories = this.getAllCategoriesRef.error;
+  categories = signal<Category[]>([]);
+  isLoadingCategories = signal(false);
+  isErrorCategories = signal(false);
 
   editBlogPostForm = new FormGroup({
     title: new FormControl<string>('', {
@@ -68,6 +68,15 @@ export class EditBlogpost {
 
   // Cargar los datos del post en el formulario cuando llegan del backend
   constructor() {
+    this.categoryService.getAllCategories().subscribe({
+      next: (cats) => {
+        this.categories.set(cats);
+      },
+      error: () => {
+        this.isErrorCategories.set(true);
+      },
+    });
+
     effect(() => {
       const blogPost = this.blogPostResourceRef.value();
       if (!blogPost) return;
@@ -173,7 +182,7 @@ export class EditBlogpost {
 
   // Devuelve el nombre de una categoria a partir de su id
   getCategoryName(categoryId: string) {
-    return this.categories()?.find((category) => category.id === categoryId)?.name ?? categoryId;
+    return this.categories().find((category) => category.id === categoryId)?.name ?? categoryId;
   }
 
   //  Slug automatico a partir del titulo

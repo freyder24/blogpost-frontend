@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, effect, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, inject, signal } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AddBlogPostRequest } from '../models/blogPost.model';
@@ -7,6 +7,7 @@ import { CategoryService } from '../../category/services/category-service';
 import { MarkdownComponent } from 'ngx-markdown';
 import { ImageSelector } from '../image-selector/image-selector';
 import { ImageUploadService } from '../services/image-upload.service';
+import { Category } from '../../category/models/category.model';
 
 @Component({
   selector: 'app-add-blogpost',
@@ -24,13 +25,19 @@ export class AddBlogpost {
   private imageUploadService = inject(ImageUploadService);
 
   // Obtenemos todas las categorias desde el backend
-  private getAllCategoriesRef = this.categoryService.getAllCategories();
-
-  categories = this.getAllCategoriesRef.value;
-  isLoadingCategories = this.getAllCategoriesRef.isLoading;
-  isErrorCategories = this.getAllCategoriesRef.error;
+  categories = signal<Category[]>([]);
+  isLoadingCategories = signal(false);
+  isErrorCategories = signal(false);
 
   constructor() {
+    this.categoryService.getAllCategories().subscribe({
+      next: (cats) => {
+        this.categories.set(cats);
+      },
+      error: () => {
+        this.isErrorCategories.set(true);
+      },
+    });
     // reacciona al cambio de la signal idle, loading, error, success
     effect(() => {
       const status = this.blogPostService.addBlogPostStatus();
@@ -147,7 +154,7 @@ export class AddBlogpost {
 
   // Devuelve el nombre de una categoria a partir de su id
   getCategoryName(categoryId: string) {
-    return this.categories()?.find((category) => category.id === categoryId)?.name ?? categoryId;
+    return this.categories().find((category) => category.id === categoryId)?.name ?? categoryId;
   }
 
   //  Slug automatico a partir del titulo

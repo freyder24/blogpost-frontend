@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { BlogPostService } from '../services/blogpost-service';
 import { DatePipe } from '@angular/common';
@@ -15,6 +15,13 @@ export class BlogpostList {
   isLoading = this.getAllBlogPostsServiceRef.isLoading;
   isError = this.getAllBlogPostsServiceRef.error;
   valueBlogPosts = this.getAllBlogPostsServiceRef.value;
+
+  isSortByOpen = signal(false);
+  sortBy = 'Más reciente';
+
+  toggleSortBy() {
+    this.isSortByOpen.update((open) => !open);
+  }
 
   reload() {
     this.getAllBlogPostsServiceRef.reload();
