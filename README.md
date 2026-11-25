@@ -120,9 +120,7 @@ Dentro de `src/environments/` se separan `environment.ts` (producción) y `envir
 
 Existe infraestructura de Karma/Jasmine con 11 archivos `.spec.ts` que verifican la creación de componentes, servicios, pipe y guard, además de renderizado básico del shell. Cubren la instanciación y configuración (zoneless, HttpClient, router, Markdown), por lo que son un punto de partida para ampliar cobertura en formularios, filtros, paginación, subida de imágenes y autorización.
 
-## Para reclutadores
-
-Este proyecto demuestra experiencia en:
+## Este proyecto demuestra experiencia en:
 
 - Angular moderno (20) con **standalone components**, **signals**, `computed`, `effect`, `input()` e `inject()`.
 - Gestión de estado asíncrono con `httpResource` y patrones reactivos sin Zone.js.
