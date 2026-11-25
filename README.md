@@ -2,6 +2,76 @@
 
 Frontend de una aplicación de blog construido con **Angular 20**, consumidor de una API REST (ASP.NET Core) para autenticar, gestionar artículos, categorías e imágenes. El proyecto está orientado a mostrar el uso de las APIs modernas de Angular (signals, `httpResource`, detección de cambios *zoneless*, SSR/hidratación y formularios reactivos) en una aplicación real con zona pública y panel de administración protegido por roles.
 
+## Capturas del proyecto
+
+Las capturas están en `docs/images/` y muestran el flujo completo: navegación pública, autenticación, acceso por rol y panel administrativo.
+
+### Zona pública
+
+**Inicio — `/`**  
+![Listado público de artículos](docs/images/home.png)  
+Portada con tarjetas de artículos: imagen destacada, categoría, fecha en español, resumen y enlace al detalle mediante `slug`.
+
+**Búsqueda de artículos — `/`**  
+![Buscador de artículos](docs/images/buscador.png)  
+Filtro reactivo en tiempo real por título, descripción corta y contenido, con estados de “sin resultados” y “lista vacía”.
+
+**Detalle de artículo — `/blog/:slug`**  
+![Detalle de artículo](docs/images/detalle-blog.png)  
+![Vista del contenido y galería](docs/images/detalle-blog2.png)  
+Vista pública del post con imagen principal, autor, fecha localizada, contenido Markdown y galería de imágenes con carga diferida.
+
+### Autenticación y acceso por rol
+
+**Registro — `/register`**  
+![Formulario de registro](docs/images/register.png)  
+Alta de usuario con validación de nombre, email y contraseña; redirige a `/login` después de registrarse.
+
+**Inicio de sesión — `/login`**  
+![Formulario de inicio de sesión](docs/images/login.png)  
+![Acceso a la sesión](docs/images/inicio-seccion.png)  
+Login con validación, mensajes de error, mostrar/ocultar contraseña y restauración de la sesión desde `/api/auth/me`.
+
+**Menú de administración según rol**  
+![Menú de administración visible para Writer/Admin](docs/images/admin-rol-menu.png)  
+El enlace de administración solo aparece para usuarios con rol `writer` o `admin`; el `adminGuard` protege las rutas `/admin/*`.
+
+### Panel administrativo ( Writer / Admin )
+
+| Acción | Ruta | Captura |
+|---|---|---|
+| Listar publicaciones | `/admin/blogposts` | `lista-blog.png` |
+| Filtrar y paginar publicaciones | `/admin/blogposts` | `paginacion-blog.png` |
+| Crear publicación | `/admin/blogposts/add` | `crear-editar-blog.png` |
+| Editar / eliminar publicación | `/admin/blogposts/edit/:id` | `crear-editar-blog.png` |
+| Listar categorías | `/admin/categories` | `lista-categoria.png` |
+| Crear / editar categoría | `/admin/categories/add`, `/admin/categories/edit/:id` | `editar-categoria.png` |
+
+**Listado de publicaciones**  
+![Panel de publicaciones](docs/images/lista-blog.png)  
+Tabla con título, autor, slug, visibilidad y fecha; incluye búsqueda, filtro por visibilidad, ordenación y acceso a editar.
+
+**Paginación y filtros del listado**  
+![Paginación del listado](docs/images/paginacion-blog.png)  
+Selector de tamaño de página (5/10/25/50), navegación entre páginas, contador total desde la API y reintento en caso de error.
+
+**Crear y editar publicación**  
+![Formulario de crear/editar publicación](docs/images/crear-editar-blog.png)  
+Formulario reactivo con validación, slug automático, vista previa Markdown, selección de categorías, imagen destacada, galería con `FormArray` y opción de eliminar en edición.
+
+**Listado de categorías**  
+![Panel de categorías](docs/images/lista-categoria.png)  
+Búsqueda enviada al backend, orden por nombre y paginación local de categorías.
+
+**Crear y editar categoría**  
+![Formulario de categoría](docs/images/editar-categoria.png)  
+Alta y edición con nombre, `urlHandle`, descripción e icono, además de actualizar y eliminar.
+
+### Diseño adaptable
+
+![Vista responsive](docs/images/responsive.png)  
+Distribución adaptable a móvil, tablet y escritorio: menú móvil, grids de tarjetas y tablas administrativas responsive.
+
 ## Funcionalidades
 
 ### Zona pública
