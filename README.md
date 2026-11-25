@@ -163,6 +163,18 @@ Base: `http://localhost:5125` (configurable en `src/environments/`).
 
 Las operaciones de escritura usan credenciales (cookies de sesión).
 
+### Backend .NET Web API REST
+
+![Endpoints de la API .NET Web API REST](docs/images/api-backen-net.png)
+
+API desarrollada en **ASP.NET Core Web API REST** con controladores `Auth`, `BlogPosts`, `Categories` e `Images`. Expone operaciones de registro/login/logout y consulta del usuario (`/api/Auth/*`), CRUD de publicaciones (`/api/BlogPosts`), CRUD de categorías (`/api/Categories`) y subida/listado de imágenes (`/api/Images`). Las operaciones de escritura están protegidas con `[Authorize(Roles = "Writer")]`, mientras que la lectura pública es abierta; la autenticación combina JWT con cookie de sesión.
+
+### Base de datos del sistema
+
+![Tablas de la base de datos del blog](docs/images/database-blogpost.png)
+
+Esquema de SQL Server del blog, generado mediante **migraciones de Entity Framework Core** (el equivalente al script de base de datos). Incluye las tablas de negocio `BlogPosts`, `Categories`, `BlogImages` y la tabla de relación `BlogPostCategory` (muchos a muchos), además de las tablas de Identity: `AspNetUsers`, `AspNetRoles`, `AspNetUserRoles`, `AspNetUserClaims`, `AspNetRoleClaims`, `AspNetUserLogins` y `AspNetUserTokens`.
+
 ## Requisitos e instalación
 
 - Node.js compatible con Angular 20 y npm.
